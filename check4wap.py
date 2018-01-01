@@ -57,9 +57,6 @@ dcap["phantomjs.page.settings.userAgent"] = (
 )
 driver = webdriver.PhantomJS(desired_capabilities=dcap)
 
-querys_file = open('vue', 'r')
-querys = querys_file.readlines()
-num = len(querys)
 
 
 my_headers = {'User-Agent' : 'Mozilla/5.0 (Linux; Android 5.0; SM-G900P Build/LRX21T) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Mobile Safari/537.36',
@@ -77,19 +74,14 @@ def print_current_time():
 
 
 
-
-url = "https:/10.135.79.205/toutiaonew?ua=Mozilla/5.0%20(Linux;%20Android%205.0;%20SM-G900P%20Build/LRX21T)&keyword=%E7%BA%A2%E7%B1%B35&vrid=70098601&"
-
 def getFromA_jude():
     for key in dict_footer_wap:
         # print key
         url_tem =  dict_footer_wap[key]
         driver.get(url_tem)
         content = driver.page_source
-        # content_lower = content.lower()
         cases = re.findall('201[78]\D.{,50}sogou',content,re.IGNORECASE|re.S)
-        # cases = re.findall('201\d.{,20}sogou',content,re.IGNORECASE|re.S)
-        # print key,url_tem
+
         lenlen = len(cases)
         if lenlen < 1:
             print "wap-----" + key + "： " + "warning warning warning NO 2017/8SOGOU!"
@@ -100,6 +92,6 @@ def getFromA_jude():
 
 
 getFromA_jude()
-querys_file.close()
+
 driver.close()
 driver.quit()
